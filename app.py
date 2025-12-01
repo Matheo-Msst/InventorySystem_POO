@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    users = get_users()  # Appel à la couche contrôleur
+    users = get_users() 
     return render_template("index.html", users=users)
 
 if __name__ == "__main__":
