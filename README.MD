@@ -3,3 +3,8 @@ Equipe : Victoria, Mathéo, Hugo et Teddy
 
 Language : Python
 Visuel : Site
+
+
+```
+python app.py
+```
