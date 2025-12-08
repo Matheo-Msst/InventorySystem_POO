@@ -32,6 +32,7 @@
             Propriétaire : {{ item.user.id if item.user else "Personne" }}<br>
             Colonne dans l'inventaire : {{ item.col if item.col is not none else "Non placé" }}
         </li>
+            <br>
     {% endfor %}
 </ul>
 

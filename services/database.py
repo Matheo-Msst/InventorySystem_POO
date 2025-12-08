@@ -11,15 +11,11 @@ def init_db():
     conn = get_connexion()
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS inventory (
+        CREATE TABLE IF NOT EXISTS item (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            damage INTEGER,
-            range INTEGER,
-            defense INTEGER,
-            rarity TEXT NOT NULL,
-            quantity INTEGER NOT NULL,
-            type TEXT NOT NULL
+            user_id INTEGER,
+            col INTEGER
         );
     ''')
     conn.commit()
