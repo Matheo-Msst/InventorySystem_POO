@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Liste des utilisateurs</title>
+</head>
+
+<body>
+<h1>Profil de {{ user.name }}</h1>
+
+<p>ID : {{ user.id }}</p>
+<p>Slot : {{ user.slot }}</p>
+
+<div class="inventory">
+    {% for row in user.inventory %}
+        {% for item in row %}
+            <div class="slot">
+                {{ item }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<a href="/">Retour</a>
+
+</body>
+</html>
