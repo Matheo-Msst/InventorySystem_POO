@@ -2,6 +2,7 @@ from flask import Flask, render_template, abort, request, redirect, url_for
 from services.user_service import get_all_users, get_user_by_id
 from services.inventory_service import InventoryService
 from models.item import Item
+from services.database import init_db
 
 
 inv = InventoryService()
@@ -46,6 +47,14 @@ def user_page(user_id):
         return "Utilisateur introuvable", 404
     
     return render_template("inventoryUser.html", user=user)
+
+def main():
+    # 1) Initialiser la base (crée la table si besoin)
+    print("🚀 Initialisation de la base de données...")
+    init_db()
+    print("✅ Base initialisée.\n")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
