@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from controllers.user_controller import get_users
+from domaine.user_controller import get_users
 
 app = Flask(__name__)
 
