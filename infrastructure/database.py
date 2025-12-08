@@ -7,7 +7,7 @@ def get_connexion():
     conn.row_factory = sqlite3.Row
     return conn
 
-def ini__db():
+def init_db():
     conn = get_connexion()
     cursor = conn.cursor()
     cursor.execute('''
@@ -20,6 +20,7 @@ def ini__db():
             rarity TEXT NOT NULL,
             quantity INTEGER NOT NULL,
             type TEXT NOT NULL
-        ),''')
+        );
+    ''')
     conn.commit()
     conn.close()
