@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Admin - Créer un item</title>
+</head>
+<body>
+<h2>Admin - Créer un item et le donner</h2>
+
+<form method="POST">
+    <label for="item_name">Nom de l'item :</label>
+    <input type="text" name="item_name" id="item_name" required>
+
+    <label for="user_id">Donner à :</label>
+    <select name="user_id" id="user_id">
+        {% for user in users %}
+            <option value="{{ user.id }}">{{ user.name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Créer et donner l'item</button>
+</form>
+
+
+<h3>Items existants :</h3>
+<ul>
+    {% for item in items %}
+        <li>
+            Nom : {{ item.name }}<br>
+            ID : {{ item.id }}<br>
+            Propriétaire : {{ item.user.id if item.user else "Personne" }}<br>
+            Colonne dans l'inventaire : {{ item.col if item.col is not none else "Non placé" }}
+        </li>
+    {% endfor %}
+</ul>
+
+
+
+
+<br>
+<a href="/">← Retour à la liste des utilisateurs</a>
+</body>
+</html>

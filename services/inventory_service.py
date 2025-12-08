@@ -1,32 +1,28 @@
-class InventoryManager:
+from models.item import Item
 
-    def __init__(self, inventory):
-        self.inventory = inventory
+class InventoryService:
 
-    def get_slot(self, row, col):
-        return self.inventory[row][col]
+    def get_slot(self, user, row, col):
+        return user.inventory[row][col]
 
-    def set_item(self, row, col, item: Item):
-        if self.inventory[row][col] == "":
-            self.inventory[row][col] = item
+    def move_item(self, user, r1, c1, r2, c2):
+        if user.inventory[r2][c2] != "":
+            return False
+        user.inventory[r2][c2] = user.inventory[r1][c1]
+        user.inventory[r1][c1] = ""
+        return True
+    
+    def set_item(self, user, row, col, item):
+        if user.inventory[row][col] == "":
+            user.inventory[row][col] = item
+            item.user = user  # mettre à jour le propriétaire
             return True
         return False
+    
+    def remove_item(self, user, row, col):
+        item = user.inventory[row][col]
+        if item != "":
+            item.user = None  # plus de propriétaire
+        user.inventory[row][col] = ""
 
-    def remove_item(self, row, col):
-        self.inventory[row][col] = ""
 
-    def move_item(self, from_row, from_col, to_row, to_col):
-        if self.inventory[to_row][to_col] != "":
-            return False 
-
-        self.inventory[to_row][to_col] = self.inventory[from_row][from_col]
-        self.inventory[from_row][from_col] = ""
-        return True
-
-    def find_item_by_id(self, item_id):
-        for r in range(3):
-            for c in range(3):
-                item = self.inventory[r][c]
-                if isinstance(item, Item) and item.id == item_id:
-                    return r, c, item
-        return None
