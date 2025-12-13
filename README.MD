@@ -6,6 +6,10 @@ Visuel : Site
 
 
 ```
+pip install flask 
+
+pip install -r requirements.txt
+
 python app.py
 ```
 
