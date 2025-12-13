@@ -1,0 +1,20 @@
+[
+   {
+    "nom": "Pomme",
+    "type": "nourriture",
+    "soin": 5
+  },
+  {
+    "nom": "Pain",
+    "type": "nourriture",
+    "soin": 10
+  },
+  {
+    "nom": "Bois",
+    "type": "ressource"
+  },
+  {
+    "nom": "Cuir",
+    "type": "ressource"
+  }
+]

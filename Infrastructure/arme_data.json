@@ -1,0 +1,17 @@
+[
+  {
+    "nom": "Épée",
+    "degat": 10,
+    "porter": 3
+  },
+  {
+    "nom": "Hache",
+    "degat": 14,
+    "porter": 1
+  },
+  {
+    "nom": "Arc",
+    "degat": 8,
+    "porter": 5
+  }
+]

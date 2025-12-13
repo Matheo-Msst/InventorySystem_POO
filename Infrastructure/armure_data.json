@@ -1,0 +1,22 @@
+[
+  {
+    "nom": "Casque",
+    "point_armure": 3,
+    "soliditer": 2
+  },
+  {
+    "nom": "Plastron",
+    "point_armure": 5,
+    "soliditer": 5
+  },
+  {
+    "nom": "Jambières",
+    "point_armure": 4,
+    "soliditer": 4
+  },
+  {
+    "nom": "Bottes",
+    "point_armure": 2,
+    "soliditer": 3
+  }
+]
