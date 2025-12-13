@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='enchant.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2>✨ Enchanter {{ item.name }}</h2>
+
+<form class="card enchant-card" method="post">
+    <label>Enchantement</label>
+    <select name="enchantment">
+        {% for ench in enchantments %}
+            <option value="{{ ench.name }}">
+                {{ ench.display_name }} – {{ ench.description }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Niveau</label>
+    <input type="number" name="level" min="1" max="5" value="1">
+
+    <button type="submit">Enchanter</button>
+</form>
+{% endblock %}

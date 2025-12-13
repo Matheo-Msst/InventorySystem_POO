@@ -8,3 +8,6 @@ Visuel : Site
 ```
 python app.py
 ```
+
+Nom de fichier : snake_case
+Nome de variable : camelCase

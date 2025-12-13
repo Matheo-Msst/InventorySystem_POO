@@ -1,0 +1,109 @@
+{
+  "materials": [
+    {
+      "id": "1",
+      "name": "Bois",
+      "image": "🪵",
+      "max_stack": 64,
+      "category": "material"
+    },
+    {
+      "id": "2",
+      "name": "Pierre",
+      "image": "🪨",
+      "max_stack": 64,
+      "category": "material"
+    },
+    {
+      "id": "3",
+      "name": "Diamant",
+      "image": "💎",
+      "max_stack": 64,
+      "category": "material"
+    },
+    {
+      "id": "10",
+      "name": "Pomme",
+      "image": "🍎",
+      "max_stack": 16,
+      "category": "food"
+    },
+    {
+      "id": "11",
+      "name": "Pain",
+      "image": "🍞",
+      "max_stack": 32,
+      "category": "food"
+    },
+    {
+      "id": "14",
+      "name": "Or",
+      "image": "🪙",
+      "max_stack": 64,
+      "category": "material"
+    },
+    {
+      "id": "15",
+      "name": "Charbon",
+      "image": "⚫",
+      "max_stack": 64,
+      "category": "material"
+    }
+  ],
+  "equipments": [
+    {
+      "id": "4",
+      "name": "Épée en Fer",
+      "image": "⚔️",
+      "category": "weapon"
+    },
+    {
+      "id": "5",
+      "name": "Épée en Diamant",
+      "image": "⚔️",
+      "category": "weapon"
+    },
+    {
+      "id": "6",
+      "name": "Excalibur",
+      "image": "⚔️",
+      "category": "weapon"
+    },
+    {
+      "id": "7",
+      "name": "Armure en Fer",
+      "image": "🛡️",
+      "category": "armor"
+    },
+    {
+      "id": "8",
+      "name": "Armure en Diamant",
+      "image": "🛡️",
+      "category": "armor"
+    },
+    {
+      "id": "9",
+      "name": "Casque du Dragon",
+      "image": "👑",
+      "category": "armor"
+    },
+    {
+      "id": "12",
+      "name": "Arc Enchanté",
+      "image": "🏹",
+      "category": "weapon"
+    },
+    {
+      "id": "13",
+      "name": "Bâton Magique",
+      "image": "🪄",
+      "category": "weapon"
+    },
+    {
+      "id": "16",
+      "name": "Hache Légendaire",
+      "image": "🪓",
+      "category": "weapon"
+    }
+  ]
+}

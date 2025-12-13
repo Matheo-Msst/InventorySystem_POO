@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='add_item.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2>➕ Ajouter un item</h2>
+
+<form class="card" method="post">
+    <label>Item</label>
+    <select name="item">
+        {% for key, value in items.items() %}
+            <option value="{{ key }}">{{ value[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Quantité</label>
+    <input type="number" name="quantity" value="1" min="1">
+
+    <button type="submit">Ajouter</button>
+</form>
+{% endblock %}

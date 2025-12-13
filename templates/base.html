@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventaire Minecraft</title>
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+
+    <!-- CSS spécifique à la page -->
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>⚔️ Inventaire Minecraft Style</h1>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

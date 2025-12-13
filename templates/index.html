@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="actions">
+    <a href="{{ url_for('add_item') }}">➕ Ajouter un item</a>
+    <a href="{{ url_for('clear') }}">🗑️ Vider</a>
+</div>
+
+<ul class="inventory">
+{% for i, slot in slots %}
+    {% if not slot.is_empty() %}
+        <li class="slot">
+            <span class="slot-number">[{{ loop.index }}]</span>
+            <span class="item">{{ slot }}</span>
+
+            {% if slot.item.is_equipment() %}
+                <a class="enchant" href="{{ url_for('enchant', slot=loop.index0) }}">
+                    ✨ Enchanter
+                </a>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endblock %}
