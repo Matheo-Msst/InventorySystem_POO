@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Inventaire de {{ user.name }}</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Inventaire de {{ user.name }}</h2>
+        <a href="/farm/{{ user.id }}" class="chest-button">🍎 Farmer des ressources</a>
+        <a href="/chest/{{ user.id }}" class="chest-button">🏺 Ouvrir le Coffre</a>
+    </div>
+
+    <div class="inventory">
+        {% for slot in user.inventory[0] %}
+            <div class="slot {% if slot != "" and slot is not none %}filled{% if slot.quantity is defined %} resource{% endif %}{% endif %}">
+                {% if slot != "" and slot is not none %}
+                    {% if slot.quantity is defined %}
+                        <!-- Affichage d'une RESSOURCE -->
+                        <div class="resource-emoji">{{ slot.get_emoji() }}</div>
+                        <div class="resource-name">{{ slot.name }}</div>
+                        <div class="resource-stack-bar">
+                            <div class="resource-stack-fill" style="width: {{ (slot.quantity / slot.get_max_stack()) * 100 }}%"></div>
+                        </div>
+                        <div class="resource-stack-text">{{ slot.quantity }}/{{ slot.get_max_stack() }}</div>
+                        <div class="resource-quantity">{{ slot.quantity }}x</div>
+                    {% else %}
+                        <!-- Affichage d'une ARME -->
+                        <div class="item-name">{{ slot.name }}</div>
+                        {% if slot.rarity is defined %}
+                            <div class="item-rarity rarity-{{ slot.rarity.name.lower() }}">
+                                {{ slot.get_rarity_name() }}
+                            </div>
+                        {% endif %}
+                        {% if slot.enchantements is defined and slot.enchantements %}
+                            <div class="item-enchantements">
+                                {% for enchant in slot.enchantements %}
+                                    <span class="enchant">{{ enchant }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <span class="empty-text">Vide</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="footer">
+        <a href="/" class="back-link">← Retour à la liste des utilisateurs</a>
+    </div>
+</div>
+</body>
+</html>

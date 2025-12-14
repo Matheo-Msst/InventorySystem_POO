@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Farm - {{ user.name }}</title>
+</head>
+<body>
+<div class="container">
+    <div class="farming-container">
+        <h2 class="farm-title">⛏️ Farming de Ressources</h2>
+        <p class="farm-subtitle">Récoltez des ressources aléatoires</p>
+
+        <div class="farm-icon" id="farmIcon">🌿</div>
+
+        <button class="farm-button" id="farmButton" onclick="farmResource()">
+            Récupérer une ressource
+        </button>
+
+        <div id="resultMessage"></div>
+
+        <div class="drop-info">
+            <h3>📊 Taux de récolte</h3>
+            {% for resource_type, info in farming_info.items() %}
+                <div class="resource-item" style="border-color: {{ info.color }};">
+                    <div class="resource-name">
+                        <span class="resource-emoji">{{ info.emoji }}</span>
+                        <span>{{ info.name }}</span>
+                    </div>
+                    <div class="resource-stats">
+                        <div class="resource-stat">
+                            <strong>{{ info.chance }}</strong>
+                            <span>Probabilité</span>
+                        </div>
+                        <div class="resource-stat">
+                            <strong>{{ info.quantity_range }}</strong>
+                            <span>Quantité</span>
+                        </div>
+                        <div class="resource-stat">
+                            <strong>Max: {{ info.max_stack }}</strong>
+                            <span>Stack</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="/user/{{ user.id }}" class="back-link">← Retour à l'inventaire</a>
+    </div>
+</div>
+
+<script>
+const USER_ID = {{ user.id }};
+
+async function farmResource() {
+    const farmButton = document.getElementById('farmButton');
+    const resultMessage = document.getElementById('resultMessage');
+    const farmIcon = document.getElementById('farmIcon');
+
+    farmButton.disabled = true;
+    farmButton.textContent = '⏳ Farming en cours...';
+
+    farmIcon.style.animation = 'none';
+    setTimeout(() => {
+        farmIcon.style.animation = 'bounce 2s infinite';
+    }, 10);
+
+    try {
+        const response = await fetch(`/api/farm/${USER_ID}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            let message = '';
+            if (data.type === 'new_resource') {
+                message = `✅ ${data.resource.emoji} Vous avez récolté ${data.resource.quantity}x ${data.resource.name}!`;
+            } else if (data.type === 'stack_update') {
+                message = `✅ ${data.resource.emoji} Ajouté à votre stack: ${data.resource.quantity}/${data.resource.max_stack}`;
+            } else if (data.type === 'stack_overflow') {
+                message = `✅ Stack plein! Débordement de ${data.new_resource.quantity}`;
+            }
+
+            showMessage(message, 'success');
+
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            showMessage('❌ ' + data.error, 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showMessage('❌ Une erreur est survenue!', 'error');
+    } finally {
+        farmButton.disabled = false;
+        farmButton.textContent = 'Récupérer une ressource';
+    }
+}
+
+function showMessage(text, type) {
+    const resultMessage = document.getElementById('resultMessage');
+    resultMessage.className = `result-message ${type}`;
+    resultMessage.textContent = text;
+    resultMessage.style.display = 'block';
+}
+</script>
+</body>
+</html>
