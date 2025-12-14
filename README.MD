@@ -1,177 +1,232 @@
-# 🎮 Inventory System POO
+# 🎮 InventorySystem RPG
 
-> Système de gestion d'inventaire avec coffre de loot aléatoire - Projet étudiant YNOV
+**Un système d'inventaire complet pour jeu de rôle fantasy - Simple à utiliser !**
 
----
-
-## 🎯 À propos
-
-**Inventory System POO** est une application web de gestion d'inventaire développée en Python avec Flask. Le système permet aux utilisateurs de gérer une grille d'inventaire (3×3) et d'ouvrir des coffres pour recevoir des armes aléatoires avec différents niveaux de rareté.
-
-Ce projet démontre l'application pratique des principes de la **Programmation Orientée Objet (POO)** dans un contexte web moderne.
+> **Projet Académique** - Groupe B2 Informatique YNOV Bordeaux  
+> Auteurs : **Hugo**, **Victoria**, **Mathéo**, **Teddy**  
+> Année : 2025
 
 ---
 
-## 👥 Équipe
+## 📋 Table des matières
 
-| Rôle | Membres |
-|------|---------|
-| **Nom d'équipe** | Teddy Beer 🍺 |
-| **Développeurs** | Victoria, Mathéo, Hugo, Teddy |
-| **École** | YNOV |
-
----
-
-## 💻 Technologies
-
-| Domaine | Technologie |
-|---------|------------|
-| **Backend** | Python 3.13 |
-| **Framework web** | Flask |
-| **Base de données** | SQLite |
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Gestion de version** | Git/GitHub |
+- [Qu'est-ce que c'est ?](#-quest-ce-que-cest-)
+- [Comment ça marche ?](#-comment-ça-marche-)
+- [Installation (facile)](#-installation-facile)
+- [Guide d'utilisation](#-guide-dutilisation)
+- [Contributeurs](#-contributeurs)
 
 ---
 
-## 🏗️ Architecture
+## 👁️ Qu'est-ce que c'est ?
 
-### Modèle MVC (Model-View-Controller)
+**InventorySystem RPG** est une application web pour gérer l'inventaire de personnages de jeu de rôle. Vous pouvez :
+
+- 📦 **Gérer votre inventaire** : 9 emplacements pour stocker vos affaires
+- 🗡️ **Collectionner des armes** : 13 armes différentes avec différentes rareté
+- 🪨 **Farmer des ressources** : Bois, pierre, charbon, fer, or, diamant
+- 🏪 **Ouvrir des coffres** : Récupérez des armes aléatoires
+- 🌾 **Récolter** : Collectez des ressources
+
+---
+
+## 🎮 Comment ça marche ?
+
+### Les pages principales
 
 ```
-InventorySystem_POO/
-├── models/                 # Couche Modèle
-│   ├── item.py            # Classe Item de base
-│   ├── user_model.py      # Classe User
-│   └── item_types/        # Sous-domaine des types d'armes
-│       ├── armes.py       # Classe Weapon
-│       └── rareter.py     # Énumération des raretés
-│
-├── services/              # Couche Logique métier
-│   ├── database.py        # Gestion SQLite et CRUD
-│   ├── user_service.py    # Services utilisateurs
-│   ├── inventory_service.py # Services inventaire
-│   ├── chest_service.py   # Services coffre & loot
-│   └── routes.py          # Routes Flask (Controller)
-│
-├── templates/             # Couche Présentation (View)
-│   ├── index.html         # Accueil & liste utilisateurs
-│   ├── inventoryUser.html # Inventaire personnel
-│   ├── chest.html         # Interface du coffre
-│   └── admin.html         # Panel administrateur
-│
-├── static/
-│   └── style.css          # Feuille de style centralisée
-│
-└── app.py                 # Point d'entrée Flask
+🏠 Accueil
+   └─→ Choix du personnage
+
+📦 Inventaire
+   └─→ Voir vos armes et ressources
+   └─→ Voir l'équipement par slot
+
+🏪 Coffres
+   └─→ Cliquez pour ouvrir
+   └─→ Récuprez une arme aléatoire
+
+🌾 Farming
+   └─→ Cliquez pour récolter
+   └─→ Récuprez une ressource aléatoire
+
+🔧 Administration
+   └─→ Ajouter manuellement des armes
+   └─→ Voir tous les joueurs
 ```
+
+### Les armes et leurs chances
+
+Quand vous ouvrez un coffre, vous avez :
+
+| Arme | Chance | Exemples |
+|------|--------|----------|
+| 🟩 Commune | 70% | Épée en bois, Dague de fer, Hache simple |
+| 🟦 Rare | 25% | Épée d'acier, Hache de guerre, Arc en ébène |
+| 🟥 Épique | 5% | Excalibur, Mjolnir, Lame des dragons |
+
+### Les ressources à récolter
+
+Quand vous farmez, vous pouvez obtenir :
+
+| Ressource | Chance | Quantité |
+|-----------|--------|----------|
+| 🌳 Bois | 30% | 4-12 |
+| 🪨 Pierre | 25% | 3-10 |
+| ⚫ Charbon | 20% | 2-8 |
+| ⚙️ Fer | 15% | 1-5 |
+| 💛 Or | 7% | 1-3 |
+| 💎 Diamant | 3% | 1 |
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation (facile)
 
-### Prérequis
+### Étape 1 : Télécharger le projet
 
-- Python 3.10+
-- pip (gestionnaire de paquets Python)
+Allez sur GitHub et téléchargez le projet :
+https://github.com/Matheo-Msst/InventorySystem_POO
 
-### Étapes
-
-1. **Cloner le dépôt**
-```bash
+ou en ligne de commande :
+```
 git clone https://github.com/Matheo-Msst/InventorySystem_POO.git
+```
+
+### Étape 2 : Installer Python (si pas déjà fait)
+
+Vous avez besoin de Python 3.10 ou plus récent. 
+Téléchargez-le sur : https://www.python.org/downloads/
+
+### Étape 3 : Ouvrir le dossier dans le terminal
+
+Naviguez jusqu'au dossier :
+```
 cd InventorySystem_POO
 ```
 
-2. **Créer un environnement virtuel** (recommandé)
-```bash
-python -m venv venv
-# Sur Windows
-venv\Scripts\activate
-# Sur macOS/Linux
-source venv/bin/activate
+### Étape 4 : Lancer l'application
+
+Tapez simplement :
 ```
-
-3. **Installer les dépendances**
-```bash
-pip install flask
-```
-
-4. **Initialiser la base de données**
-```bash
-python app.py
-# La base de données `inventory.db` sera créée automatiquement
-```
-
----
-
-## ▶️ Utilisation
-
-### Lancer l'application
-
-```bash
 python app.py
 ```
 
-L'application sera accessible à : **http://127.0.0.1:5000**
+### Étape 5 : Ouvrir dans le navigateur
 
-### Points d'accès principaux
+Allez à cette adresse :
+```
+http://localhost:5000
+```
 
-| Route | Description |
-|-------|-------------|
-| `/` | **Accueil** - Liste de tous les utilisateurs |
-| `/user/<id>` | **Inventaire** - Grille 3×3 de l'utilisateur |
-| `/chest/<id>` | **Coffre** - Interface pour ouvrir un coffre |
-| `/admin` | **Panel Admin** - Créer manuellement des armes |
+**C'est tout ! L'app est prête à utiliser ! 🎉**
 
 ---
 
-## ✨ Fonctionnalités
+## 📖 Guide d'utilisation
 
-### 🎒 Gestion d'inventaire
-- Grille d'inventaire **3×3** (9 emplacements)
-- Affichage des armes avec **nom** et **rareté**
-- Prise en charge des emplacements vides
-- **Persistance** via SQLite
+### 1️⃣ Première visite - Accueil
 
-### 🏺 Système de coffre
-- Génération aléatoire d'armes
-- Système de **rareté** probabiliste :
-  - 🟡 **Commun** : 70%
-  - 🟢 **Rare** : 25%
-  - ⭐ **Épique** : 5%
-- Interface visuelle avec animations
-- **Vérification** des emplacements avant ajout
+- Vous arrivez sur la page d'accueil
+- Cliquez sur le personnage que vous voulez jouer
+- Vous êtes maintenant sur votre page de joueur
 
-### ⚔️ Gestion d'armes
-- Création d'armes avec rareté sélectionnable
-- Affichage en couleur selon la rareté
-- Attribution automatique à un utilisateur
-- Placement intelligent dans le premier slot vide
+### 2️⃣ Voir votre inventaire
 
-### 🔧 Panel administrateur
-- Créer des armes manuellement
-- Sélectionner la rareté
-- Assigner à un utilisateur
-- Visualiser toutes les armes créées
+Sur votre page, vous voyez :
+- **Vos armes** avec leur rareté (couleur)
+- **Vos ressources** avec la quantité
+- **9 emplacements** pour stocker vos affaires
+
+Cliquez sur une arme pour voir ses détails.
+
+### 3️⃣ Ouvrir un coffre
+
+- Allez dans la section "Coffres"
+- Cliquez sur le bouton "Ouvrir coffre"
+- Une arme aléatoire vous est donnée
+- Elle s'ajoute à votre inventaire
+
+**Conseil** : Vous avez plus de chances d'avoir une arme commune, mais les épiques sont possibles !
+
+### 4️⃣ Récolter des ressources
+
+- Allez dans la section "Farming"
+- Cliquez sur le bouton "Récolter"
+- Une ressource aléatoire est ajoutée
+- Elle s'ajoute à votre inventaire
+
+**Conseil** : Le bois et la pierre sont plus faciles à trouver que le diamant !
+
+### 5️⃣ Admin - Ajouter une arme manuellement
+
+Si vous êtes admin :
+- Allez dans la page "Administration"
+- Remplissez le formulaire :
+  - **Nom de l'arme** : Écrivez un nom (ex: "Épée flamboyante")
+  - **Rareté** : Sélectionnez COMMUN, RARE ou EPIC
+  - **Joueur** : Choisissez le personnage qui la reçoit
+- Cliquez "Ajouter"
+- L'arme apparaît dans l'inventaire
+
+
+
+
+## 🎨 Apparence et design
+
+### Les couleurs
+
+- 🟩 **Vert** = Arme commune (70%)
+- 🟦 **Bleu** = Arme rare (25%)
+- 🟥 **Rouge** = Arme épique (5%)
+- ⚫ **Gris** = Ressource
+
+### Emojis et icônes
+
+Chaque type d'item a son emoji pour être reconnu rapidement :
+- 🗡️ Armes
+- 🌳 Bois
+- 🪨 Pierre
+- 💎 Diamant
+- etc.
 
 ---
 
-## 📝 Exemple d'utilisation
 
-### Scénario : Un utilisateur ouvre un coffre
+---
 
-1. **Utilisateur navigue** vers `/chest/1`
-2. **Clic sur le bouton** "Ouvrir le coffre"
-3. **Requête POST** vers `/api/open-chest/1`
-4. **ChestService** :
-   - Génère nombre aléatoire (0-1)
-   - Détermine rareté (70%, 25%, 5%)
-   - Sélectionne arme du groupe
-5. **Routes** :
-   - Vérifie emplacement libre
-   - Sauvegarde dans `inventory.db`
-6. **Réponse JSON** avec détails de l'arme
-7. **Frontend** affiche animation + mise à jour inventaire
+## 🤝 Contributeurs
 
+| Nom ||
+|-----|------|
+| **Hugo** | 
+| **Victoria** | 
+| **Mathéo** | 
+| **Teddy** |
 
+---
+
+## 📞 Besoin d'aide ?
+
+Si quelque chose ne fonctionne pas :
+
+1. **Essayez de rafraîchir** la page (F5)
+2. **Vérifiez que l'app est lancée** (python app.py)
+3. **Contactez un contributeur** sur GitHub
+4. **Ouvrez une "Issue"** sur le repository
+
+---
+
+## 🎯 Résumé ultra-rapide
+
+```
+C'est quoi ?         → Un système d'inventaire pour jeu RPG
+Comment ça marche ?  → Vous ouvrez des coffres et réoltez des ressources
+Comment l'utiliser ? → C'est intuitif, presque comme un jeu !
+Qui peut l'utiliser ?→ N'importe qui, même sans connaître la programmation
+```
+
+---
+
+**Créé avec ❤️ par les étudiants B2 YNOV Bordeaux - 2025**
+
+Amusez-vous bien ! 🎮✨

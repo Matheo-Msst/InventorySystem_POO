@@ -15,7 +15,7 @@ class InventoryService:
     def set_item(self, user, row, col, item):
         if user.inventory[row][col] == "":
             user.inventory[row][col] = item
-            item.user = user  # mettre à jour le propriétaire
+            item.user = user  
             return True
         return False
     

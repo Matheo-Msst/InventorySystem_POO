@@ -58,11 +58,9 @@ async function farmResource() {
     const resultMessage = document.getElementById('resultMessage');
     const farmIcon = document.getElementById('farmIcon');
 
-    // Désactiver le bouton
     farmButton.disabled = true;
     farmButton.textContent = '⏳ Farming en cours...';
 
-    // Animation du pickaxe
     farmIcon.style.animation = 'none';
     setTimeout(() => {
         farmIcon.style.animation = 'bounce 2s infinite';
@@ -79,7 +77,6 @@ async function farmResource() {
         const data = await response.json();
 
         if (data.success) {
-            // Afficher le message de succès
             let message = '';
             if (data.type === 'new_resource') {
                 message = `✅ ${data.resource.emoji} Vous avez récolté ${data.resource.quantity}x ${data.resource.name}!`;
@@ -91,7 +88,6 @@ async function farmResource() {
 
             showMessage(message, 'success');
 
-            // Recharger après 2 secondes
             setTimeout(() => {
                 location.reload();
             }, 2000);

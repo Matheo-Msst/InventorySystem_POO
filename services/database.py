@@ -144,12 +144,10 @@ def find_empty_slot(user_id):
     conn = get_connexion()
     cursor = conn.cursor()
     for col in range(9):
-        # Vérifier si le slot est occupé par une arme
         cursor.execute('SELECT * FROM weapons WHERE user_id = ? AND col = ?', (user_id, col))
         if cursor.fetchone() is not None:
             continue
         
-        # Vérifier si le slot est occupé par une ressource
         cursor.execute('SELECT * FROM resources WHERE user_id = ? AND col = ?', (user_id, col))
         if cursor.fetchone() is not None:
             continue
@@ -255,7 +253,6 @@ def find_stackable_resource_slot(user_id, resource_type):
     resources = cursor.fetchall()
     
     for resource_row in resources:
-        # Récupérer le max_stack depuis le type de ressource
         from models.item_types.ressource import RessourceType
         max_stack = RessourceType[resource_type].get_max_stack()
         
@@ -272,12 +269,10 @@ def find_empty_resource_slot(user_id):
     cursor = conn.cursor()
     
     for col in range(9):
-        # Vérifier si le slot est occupé par une arme
         cursor.execute('SELECT * FROM weapons WHERE user_id = ? AND col = ?', (user_id, col))
         if cursor.fetchone() is not None:
             continue
         
-        # Vérifier si le slot est occupé par une ressource
         cursor.execute('SELECT * FROM resources WHERE user_id = ? AND col = ?', (user_id, col))
         if cursor.fetchone() is None:
             conn.close()
