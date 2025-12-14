@@ -8,17 +8,24 @@ from Domain.item.rareter import Rareter
 
 class Item_factory:
 
+    def generer_rareter(self): 
+        r = random.random() 
+        cumul = 0 
+        for rareter in Rareter: 
+            cumul += rareter.chance_drop() 
+            if r <= cumul: 
+                return rareter 
+
     def arme_aleatoire(self) :
         #chemin vers le JSON
         with open("infrastructure/arme_data.json", "r", encoding="utf-8") as f:
             armes= json.load(f)
     
         resultat = random.choice(armes)
-        rareter = random.choice(list(Rareter))
 
         return Arme(
             nom=resultat["nom"],
-            rareter= rareter,
+            rareter= self.generer_rareter(),
             degat= resultat["degat"],
             porter= resultat["porter"]
         )
