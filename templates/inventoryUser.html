@@ -2,26 +2,37 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Inventaire de {{ user.name }}</title>
 </head>
-
 <body>
-<h2>Inventaire de {{ user.name }}</h2>
+<div class="container">
+    <div class="header">
+        <h2>Inventaire de {{ user.name }}</h2>
+        <a href="/chest/{{ user.id }}" class="chest-button">🏺 Ouvrir le Coffre</a>
+    </div>
 
-<div class="inventory">
-    {% for slot in user.inventory[0] %}
-        <div class="slot">
-            {% if slot != "" and slot is not none %}
-                {{ slot.name }} (Col {{ slot.col }})
-            {% endif %}
-        </div>
-    {% endfor %}
+    <div class="inventory">
+        {% for slot in user.inventory[0] %}
+            <div class="slot {% if slot != "" and slot is not none %}filled{% endif %}">
+                {% if slot != "" and slot is not none %}
+                    <div class="item-name">{{ slot.name }}</div>
+                    {% if slot.rarity is defined %}
+                        <div class="item-rarity rarity-{{ slot.rarity.name.lower() }}">
+                            {{ slot.get_rarity_name() }}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <span class="empty-text">Vide</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 
+    <div class="footer">
+        <a href="/" class="back-link">← Retour à la liste des utilisateurs</a>
+    </div>
 </div>
-
-
-<br>
-<a href="/">← Retour</a>
 </body>
 </html>

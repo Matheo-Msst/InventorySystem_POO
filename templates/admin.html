@@ -2,44 +2,63 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Admin - Créer un item</title>
+    <title>Admin - Créer une Arme</title>
 </head>
 <body>
-<h2>Admin - Créer un item et le donner</h2>
+<div class="container">
+    <h1>⚙️ Panel d'Administration</h1>
 
-<form method="POST">
-    <label for="item_name">Nom de l'item :</label>
-    <input type="text" name="item_name" id="item_name" required>
+    <h2 style="margin-bottom: 20px;">Créer une Arme avec Rareté</h2>
 
-    <label for="user_id">Donner à :</label>
-    <select name="user_id" id="user_id">
-        {% for user in users %}
-            <option value="{{ user.id }}">{{ user.name }}</option>
-        {% endfor %}
-    </select>
+    <form method="POST">
+        <label for="item_name">Nom de l'arme :</label>
+        <input type="text" name="item_name" id="item_name" placeholder="Ex: Épée de feu" required>
 
-    <button type="submit">Créer et donner l'item</button>
-</form>
+        <label for="rarity">Rareté :</label>
+        <select name="rarity" id="rarity" required>
+            <option value="COMMUN">⚫ Commun (70%)</option>
+            <option value="RARE">🟢 Rare (25%)</option>
+            <option value="EPIC">⭐ Épique (5%)</option>
+        </select>
 
+        <label for="user_id">Donner à :</label>
+        <select name="user_id" id="user_id" required>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
 
-<h3>Items existants :</h3>
-<ul>
-    {% for item in items %}
-        <li>
-            Nom : {{ item.name }}<br>
-            ID : {{ item.id }}<br>
-            Propriétaire : {{ item.user.id if item.user else "Personne" }}<br>
-            Colonne dans l'inventaire : {{ item.col if item.col is not none else "Non placé" }}
-        </li>
-            <br>
-    {% endfor %}
-</ul>
+        <button type="submit" class="submit-btn">Créer et Donner l'Arme</button>
+    </form>
 
+    <div class="items-section">
+        <h3>⚔️ Armes Créées</h3>
+        {% if items %}
+            {% for item in items %}
+                <div class="item-card">
+                    <div class="item-name">⚔️ {{ item.name }}</div>
+                    {% if item.rarity is defined %}
+                        <div class="item-rarity rarity-{{ item.rarity.name.lower() }}">
+                            {{ item.get_rarity_name() }}
+                        </div>
+                    {% endif %}
+                    <div style="margin-top: 12px; font-size: 13px; color: #999;">
+                        <strong>ID:</strong> {{ item.id }} • 
+                        <strong>Propriétaire:</strong> {{ item.user.name if item.user else "Personne" }} • 
+                        <strong>Slot:</strong> {{ item.col if item.col is not none else "Non placé" }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: #999; padding: 20px;">Aucune arme créée pour le moment</p>
+        {% endif %}
+    </div>
 
-
-
-<br>
-<a href="/">← Retour à la liste des utilisateurs</a>
+    <div class="footer">
+        <a href="/" class="back-link">← Retour à la Liste des Utilisateurs</a>
+    </div>
+</div>
 </body>
 </html>

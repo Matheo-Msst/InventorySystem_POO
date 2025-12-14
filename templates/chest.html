@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Coffre de {{ user.name }}</title>
+</head>
+<body>
+<div class="container">
+    <h1>🏺 Coffre Mystérieux</h1>
+
+    <div class="chest-display">
+        <div class="chest-icon">🏺</div>
+        <div class="chest-text">Ouvrez le coffre pour découvrir une arme mystérieuse...</div>
+        <button class="open-button" id="openChestBtn" onclick="openChest()">Ouvrir le Coffre</button>
+    </div>
+
+    <div class="drop-rates">
+        <h3>📊 Taux de Drop</h3>
+        <div class="drop-item commun">
+            <span class="drop-name">⚫ Commun</span>
+            <span class="drop-chance">70%</span>
+        </div>
+        <div class="drop-item rare">
+            <span class="drop-name">🟢 Rare</span>
+            <span class="drop-chance">25%</span>
+        </div>
+        <div class="drop-item epic">
+            <span class="drop-name">⭐ Épique</span>
+            <span class="drop-chance">5%</span>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Ouverture du coffre...</p>
+    </div>
+
+    <div class="result" id="result">
+        <div id="resultContent"></div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="/user/{{ user.id }}" class="back-link">← Retour à l'inventaire</a>
+    </div>
+</div>
+
+<script>
+    async function openChest() {
+        const openBtn = document.getElementById('openChestBtn');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+        const resultContent = document.getElementById('resultContent');
+
+        // Désactiver le bouton et afficher le chargement
+        openBtn.disabled = true;
+        loading.style.display = 'block';
+        result.classList.remove('show');
+
+        try {
+            const response = await fetch('/api/open-chest/{{ user.id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            // Attendre un peu pour l'animation
+            setTimeout(() => {
+                loading.style.display = 'none';
+
+                if (response.ok && data.success) {
+                    // Afficher l'arme obtenue
+                    const weapon = data.weapon;
+                    resultContent.innerHTML = `
+                        <div class="weapon-icon">⚔️</div>
+                        <h2 style="color: #333; margin-bottom: 15px;">Vous avez obtenu:</h2>
+                        <div class="weapon-card">
+                            <div class="weapon-name">${weapon.name}</div>
+                            <div class="weapon-rarity rarity-${weapon.rarity.toLowerCase()}">
+                                ${weapon.rarity_display}
+                            </div>
+                        </div>
+                        <div class="result-text success">✓ Ajouté à votre inventaire!</div>
+                    `;
+                    result.classList.add('show', 'result-success');
+                } else {
+                    // Afficher l'erreur
+                    resultContent.innerHTML = `
+                        <div style="font-size: 40px; margin-bottom: 15px;">❌</div>
+                        <h2 style="color: #f44336; margin-bottom: 15px;">Erreur</h2>
+                        <div class="result-text error">${data.error || 'Une erreur est survenue'}</div>
+                    `;
+                    result.classList.add('show', 'result-error');
+                }
+            }, 1500);
+        } catch (error) {
+            loading.style.display = 'none';
+            resultContent.innerHTML = `
+                <div style="font-size: 40px; margin-bottom: 15px;">⚠️</div>
+                <h2 style="color: #f44336; margin-bottom: 15px;">Erreur de Connexion</h2>
+                <div class="result-text error">${error.message}</div>
+            `;
+            result.classList.add('show', 'result-error');
+        } finally {
+            // Réactiver le bouton après 3 secondes
+            setTimeout(() => {
+                openBtn.disabled = false;
+            }, 3000);
+        }
+    }
+</script>
+</body>
+

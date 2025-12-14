@@ -2,19 +2,27 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des utilisateurs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Inventaire - Liste des Utilisateurs</title>
 </head>
 <body>
-    <h1>Utilisateurs</h1>
-    <ul>
-<ul>
-    {% for user in users %}
-        <a href="/user/{{ user.id }}">
-            <li>{{ user.id }}, {{ user.name }}</li>
-        </a>
-    {% endfor %}
-</ul>
-<br>
-<a href="/admin">Bonton admin </a>
+<div class="container">
+    <h1>👥 Sélectionnez un Utilisateur</h1>
+    
+    <div class="users-grid">
+        {% for user in users %}
+            <div class="user-card">
+                <h3>{{ user.name }}</h3>
+                <p style="color: #999; font-size: 14px;">ID: {{ user.id }}</p>
+                <a href="/user/{{ user.id }}">Voir l'inventaire →</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="footer">
+        <a href="/admin" class="back-link">⚙️ Panel d'Administration</a>
+    </div>
+</div>
 </body>
 </html>
