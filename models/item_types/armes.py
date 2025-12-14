@@ -18,6 +18,7 @@ class Weapon(Item):
         """
         super().__init__(id, name, user, col)
         self.rarity = rarity
+        self.enchantements = []
     
     def get_rarity_name(self) -> str:
         """Retourne le nom lisible de la rareté"""

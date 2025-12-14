@@ -3,7 +3,9 @@ from typing import Union
 from models.item_types.armes import Weapon
 from models.item_types.rareter import Rareter
 from models.item_types.ressource import Resource, RessourceType
-
+from models.enchantement.enchantement_glace import IceEnchantement
+from models.enchantement.enchantement_feu import FireEnchantement
+       
 
 class ItemFactory:
     
@@ -74,7 +76,21 @@ class ItemFactory:
         
         weapon_name = random.choice(weapon_names)
         
-        return Weapon(0, weapon_name, rarity)
+    
+        weapon = Weapon(0, weapon_name, rarity)
+
+        weapon.enchantements = []
+
+        # Enchantements aléatoires
+        if random.random() < 0.6:
+            weapon = FireEnchantement(weapon)
+            weapon.enchantements.append("Feu")  
+
+        if random.random() < 0.3:
+            weapon = IceEnchantement(weapon)
+            weapon.enchantements.append("Glace")
+
+        return weapon
     
     @staticmethod
     def create_weapon(item_id: int, name: str, rarity: Rareter, user=None, col=None) -> Weapon:
@@ -101,6 +117,9 @@ class ItemFactory:
         )
         return weapon
     
+    
+
+ 
     # ===== RESSOURCES =====
     
     @staticmethod

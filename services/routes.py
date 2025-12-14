@@ -128,7 +128,8 @@ def open_chest(user_id):
             "name": weapon.name,
             "rarity": weapon.rarity.name,
             "rarity_display": weapon.get_rarity_name(),
-            "color": weapon.get_rarity_color()
+            "color": weapon.get_rarity_color(),
+            "enchantements": weapon.enchantements
         }
     }), 200
 

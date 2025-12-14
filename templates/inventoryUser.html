@@ -16,7 +16,7 @@
 
     <div class="inventory">
         {% for slot in user.inventory[0] %}
-            <div class="slot {% if slot != "" and slot is not none %}filled{% if slot.quantity is defined %}resource{% endif %}{% endif %}">
+            <div class="slot {% if slot != "" and slot is not none %}filled{% if slot.quantity is defined %} resource{% endif %}{% endif %}">
                 {% if slot != "" and slot is not none %}
                     {% if slot.quantity is defined %}
                         <!-- Affichage d'une RESSOURCE -->
@@ -33,6 +33,13 @@
                         {% if slot.rarity is defined %}
                             <div class="item-rarity rarity-{{ slot.rarity.name.lower() }}">
                                 {{ slot.get_rarity_name() }}
+                            </div>
+                        {% endif %}
+                        {% if slot.enchantements is defined and slot.enchantements %}
+                            <div class="item-enchantements">
+                                {% for enchant in slot.enchantements %}
+                                    <span class="enchant">{{ enchant }}</span>
+                                {% endfor %}
                             </div>
                         {% endif %}
                     {% endif %}

@@ -1,4 +1,4 @@
-from Domain.equipement import Equipement
+from .equipement import Equipement
 
 class Armure(Equipement):
     def __init__(self, nom: str, defense: int, rarete: str):

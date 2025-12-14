@@ -72,6 +72,16 @@
 
                 if (response.ok && data.success) {
                     const weapon = data.weapon;
+                    let enchantHtml = "";
+                    if (weapon.enchantements && weapon.enchantements.length > 0) {
+                        enchantHtml = `
+                            <div class="weapon-enchantments">
+                                ${weapon.enchantements.map(e => 
+                                    `<span class="enchant">${e}</span>`
+                                ).join("")}
+                            </div>
+                        `;
+                    }
                     resultContent.innerHTML = `
                         <div class="weapon-icon">⚔️</div>
                         <h2 style="color: #333; margin-bottom: 15px;">Vous avez obtenu:</h2>
@@ -80,6 +90,7 @@
                             <div class="weapon-rarity rarity-${weapon.rarity.toLowerCase()}">
                                 ${weapon.rarity_display}
                             </div>
+                            ${enchantHtml}
                         </div>
                         <div class="result-text success">✓ Ajouté à votre inventaire!</div>
                     `;
