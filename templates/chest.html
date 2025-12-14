@@ -53,7 +53,6 @@
         const result = document.getElementById('result');
         const resultContent = document.getElementById('resultContent');
 
-        // Désactiver le bouton et afficher le chargement
         openBtn.disabled = true;
         loading.style.display = 'block';
         result.classList.remove('show');
@@ -68,12 +67,10 @@
 
             const data = await response.json();
 
-            // Attendre un peu pour l'animation
             setTimeout(() => {
                 loading.style.display = 'none';
 
                 if (response.ok && data.success) {
-                    // Afficher l'arme obtenue
                     const weapon = data.weapon;
                     resultContent.innerHTML = `
                         <div class="weapon-icon">⚔️</div>
@@ -88,7 +85,6 @@
                     `;
                     result.classList.add('show', 'result-success');
                 } else {
-                    // Afficher l'erreur
                     resultContent.innerHTML = `
                         <div style="font-size: 40px; margin-bottom: 15px;">❌</div>
                         <h2 style="color: #f44336; margin-bottom: 15px;">Erreur</h2>
@@ -106,7 +102,6 @@
             `;
             result.classList.add('show', 'result-error');
         } finally {
-            // Réactiver le bouton après 3 secondes
             setTimeout(() => {
                 openBtn.disabled = false;
             }, 3000);
