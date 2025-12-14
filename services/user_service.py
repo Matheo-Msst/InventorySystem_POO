@@ -4,7 +4,9 @@ users_db = [
     User(1, "Alice"),
     User(2, "Bob"),
     User(3, "yuno"),
-    User(4, "Connard")
+    User(4, "Victor"),
+    User(5, "Eve"),
+    User(6, "Mallory")
 ]
 
 def get_all_users():

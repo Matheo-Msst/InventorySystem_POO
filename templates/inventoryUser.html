@@ -10,18 +10,31 @@
 <div class="container">
     <div class="header">
         <h2>Inventaire de {{ user.name }}</h2>
+        <a href="/farm/{{ user.id }}" class="chest-button">🍎 Farmer des ressources</a>
         <a href="/chest/{{ user.id }}" class="chest-button">🏺 Ouvrir le Coffre</a>
     </div>
 
     <div class="inventory">
         {% for slot in user.inventory[0] %}
-            <div class="slot {% if slot != "" and slot is not none %}filled{% endif %}">
+            <div class="slot {% if slot != "" and slot is not none %}filled{% if slot.quantity is defined %}resource{% endif %}{% endif %}">
                 {% if slot != "" and slot is not none %}
-                    <div class="item-name">{{ slot.name }}</div>
-                    {% if slot.rarity is defined %}
-                        <div class="item-rarity rarity-{{ slot.rarity.name.lower() }}">
-                            {{ slot.get_rarity_name() }}
+                    {% if slot.quantity is defined %}
+                        <!-- Affichage d'une RESSOURCE -->
+                        <div class="resource-emoji">{{ slot.get_emoji() }}</div>
+                        <div class="resource-name">{{ slot.name }}</div>
+                        <div class="resource-stack-bar">
+                            <div class="resource-stack-fill" style="width: {{ (slot.quantity / slot.get_max_stack()) * 100 }}%"></div>
                         </div>
+                        <div class="resource-stack-text">{{ slot.quantity }}/{{ slot.get_max_stack() }}</div>
+                        <div class="resource-quantity">{{ slot.quantity }}x</div>
+                    {% else %}
+                        <!-- Affichage d'une ARME -->
+                        <div class="item-name">{{ slot.name }}</div>
+                        {% if slot.rarity is defined %}
+                            <div class="item-rarity rarity-{{ slot.rarity.name.lower() }}">
+                                {{ slot.get_rarity_name() }}
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% else %}
                     <span class="empty-text">Vide</span>

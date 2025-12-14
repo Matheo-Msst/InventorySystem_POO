@@ -601,6 +601,199 @@ button[type="submit"]:active,
 }
 
 /* ========================================
+   RESSOURCES (INVENTAIRE)
+   ======================================== */
+
+.slot.resource {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(52, 152, 219, 0.1));
+    position: relative;
+}
+
+.resource-quantity {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+}
+
+.resource-emoji {
+    font-size: 36px;
+    margin: 8px 0;
+}
+
+.resource-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.resource-stack-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.resource-stack-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    transition: width 0.3s ease;
+}
+
+.resource-stack-text {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* ========================================
+   FARMING (FARM.HTML)
+   ======================================== */
+
+.farming-container {
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.farm-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.farm-subtitle {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 30px;
+}
+
+.farm-icon {
+    font-size: 120px;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+.farm-button {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+.farm-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+}
+
+.farm-button:active {
+    transform: translateY(0);
+}
+
+.farm-button:disabled {
+    background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.drop-info {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(39, 174, 96, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+}
+
+.drop-info h3 {
+    color: #27ae60;
+    margin-bottom: 15px;
+}
+
+.resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 6px;
+    border-left: 3px solid;
+}
+
+.resource-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resource-emoji {
+    font-size: 24px;
+}
+
+.resource-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.resource-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resource-stat strong {
+    color: #333;
+}
+
+.result-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    animation: slideIn 0.4s ease;
+}
+
+.result-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.result-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 
